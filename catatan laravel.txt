@@ -1,0 +1,83 @@
+laravel
+!+tab --> html vscode
+blade {{}}
+container-fluid-->container
+extending
+
+6:43 AM 8/31/2021
+
+.env 
+-----
+ itu tidak akan dibawa di git,iyu bisa dilihat di git.ignore,jadi nanti .env harus dibuat ulang ketika di tempat lain,
+.env itu untuk setting db dan lain2,adapun untuk template nya itu ada .env example
+setting defaultnya di config-->database.php
+
+migrate
+------
+php artisan migrate
+insert table dari folder database-->migration
+menggunakan function up()
+rollback
+-------
+php artisan migrate:rollback
+untuk mendrop tabel 
+    
+    public function down()
+7:36 AM 9/2/2021
+fresh
+------
+php artisan migrate:fresh
+drop and insert ke tabel
+
+
+APP_ENV = Production
+--------------------
+apabila mau jalan nin fresh maka akan ada warning jika m=di production
+refreansi typ data ada di coulumn methode
+
+elequent
+--------
+cara mengisi data langsung dg script tools vs_code,
+tanpa query insert ke db
+step:
+1.php artisan tinker di cmd
+2.file nya ad dimodel (struktur filenya) terbuat langsung ex: fil di model-user.php
+3.cara buat post model struktur filenya:
+ $user = new App\Models\User; //artinya ambil dulu file struktur nya di model dibungkus dg $user
+$user->name='Ridwan Corner'//isi field nya
+$user->save()//setelahnya simpan
+-------------------------------------------
+ $user = new App\Models\User;
+=> App\Models\User {#3467}
+>>> $user->name='Ridwan Corner'
+=> "Ridwan Corner"
+>>> $user->email='Ridwan_Corner@gmail.com'
+=> "Ridwan_Corner@gmail.com"
+>>> $user->password=bcrypt('123')
+=> "$2y$10$1q1V./I0ib71Q/JgiT8ER.Avh9ZRRrLxqKDnx.gymZf3AAnN5bxR2"
+>>> $user->save()
+-------------------------------------------
+6:04 AM 9/22/2021
+.-cara melihat hasil save()
+1.$user->all()
+2.$user->first()
+3.$user->find(2)-->kalau ada data nya
+4.$user->findorfail(2000)-->menampilkan pesan error
+==MODEL==
+model adalah untuk menangani database,dengan memnaggil file model di rottenya
+dilaravel bisa dengan pembuatan tabel sekaligus,seperti dibawah ini
+1.php artisan make:model
+2. php artisan help make:model->untuk menampilkan help
+3. akan dibuatkan  2file,di folder database berisi skema create tabel
+   dan di folder Models
+	contoh schema table
+ Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('excerpt');
+            $table->text('body');
+            $table->timestamp('published_at')->nullable();
+            $table->timestamps();// ini fugsi
+
+	untuk exec:cmd : php artisan migrate:
+			 php artisan migrate:refresh -- untuk mendrop terlebih dahulu
