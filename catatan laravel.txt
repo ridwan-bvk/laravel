@@ -81,3 +81,37 @@ dilaravel bisa dengan pembuatan tabel sekaligus,seperti dibawah ini
 
 	untuk exec:cmd : php artisan migrate:
 			 php artisan migrate:refresh -- untuk mendrop terlebih dahulu
+9/23/2021
+4. $table->timestamps();// ini fugsi untuk membuat craet at,update at
+5. notasi object dari {{$post['id']}} menjadi {{ $post->id }
+==SEDDER===
+menambah data random
+file nya ada di database sedder
+1. buat seeder di database Sedder jika manual seperti ini:
+  User::create([
+            'name' => 'ridwan',
+            'email' => 'ridwan@gmail.com',
+            'password' => bcrypt('123456')
+        ]);
+cara menjalankannya:
+kemudian jalankan
+php artisan db:seed
+
+
+5. fakker
+cara menambah data dummmy yang relevant
+1.referensi faker:
+-----------------
+https://fakerphp.github.io/
+https://fakerphp.github.io/formatters/
+2. setting 
+-----------
+2.1. di folder App-config--app.php setting
+'faker_locale' => env('FAKER_LOCALE','en_US'),
+jadi kita buat settingan di env nya dengan settingan FAKER_LOCALE,
+2.2 di env nya setting,file env
+FAKER_LOCALE = id_ID
+3. cara kerjanya
+----------------
+di sedder nya kita tulis-di database seeder
+  User::factory(5)->create();

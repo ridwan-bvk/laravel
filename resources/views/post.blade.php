@@ -1,13 +1,20 @@
-{{-- @dd($post) --}}
+
 @extends('layouts.main')
 @section('container')
-     @foreach ($posts as $pos)
-     <article class="mb-5">
-        <a href="/post/{{ $pos["slug"] }}"><h2>{{ $pos["titles"] }}</h2></a>
-        <h5>By: {{ $pos["Author"] }}</h5>     
-        <p>{{ $pos["body"] }}</p>
-        
-     </article>
-    @endforeach
+
+@dd($post)
+    {{-- <h1 class="mb-5">{{ $post->title }}</h1> --}}
+    <p>
+        {{-- by. <a href="#" class="text-decoration-none">{{$posts->user->name}}</a>  --}}
+        {{-- in <a href="/categories/ {{ $posts->slug }}">
+            {{ $post->category->name }}
+        </a> --}}
+     </p>
+
+        {{-- {!! $post->body!!} --}}
+   
+    {{-- //d-block itu biar enter --}}
+    <a href="/posts/" class="d-block mt-5">back to posts</a>
+    
 
 @endsection
