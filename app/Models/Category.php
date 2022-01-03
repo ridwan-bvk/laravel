@@ -13,6 +13,12 @@ class Category extends Model
     public function posts(){
         return $this->hasMany(Post::class);
     }
+    public function user(){
+        return $this->belongsTo(user::class);
+    }
+    public function post(){
+        return $this->belongsTo(post::class);
+    }
     // public static function find($slug){
     //     // $posts = self::$blog_post1;
     //     $posts = static::all();

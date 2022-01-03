@@ -8,11 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model{
     use HasFactory;
     protected $guarded =['id'];
+    protected $with = ['category','author'];//akan terbawa terus ketk diambil model
 
+        
     public function category(){
-        return $this->belongsTo(category::class);
+     return $this->belongsTo(category::class);
+    }
+    public function author(){///membuat alias agar tidak merubah struktur field //user(){
+        return $this->belongsTo(user::class,'user_id');//memakai alias,sesuaikan smeua pemanggilannya 
     }
 }
+
 // class Post {
 //     private static  $blog_post1=[
 //         [

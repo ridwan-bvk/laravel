@@ -1,21 +1,25 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
     <div class="container">
-      <a class="navbar-brand" href="/">Ridwans-Corner</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link {{ ($tittle === "Home") ? 'active':'' }}" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ ($tittle === "About") ? 'active':'' }}" href="/about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ ($tittle === "Blog") ? 'active':'' }}" href="/posts">Blog</a>
-          </li>
-        </ul>
-      </div>
+        <a class="navbar-brand" href="/">Ridwans-Corner</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link {{ $active === 'home' ? 'active' : '' }}" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $active === 'about' ? 'active' : '' }}" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $active === 'blog' ? 'active' : '' }}" href="/posts">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $active === 'catagories' ? 'active' : '' }}" href="/categories">Catagories</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>

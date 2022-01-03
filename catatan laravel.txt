@@ -115,3 +115,162 @@ FAKER_LOCALE = id_ID
 ----------------
 di sedder nya kita tulis-di database seeder
   User::factory(5)->create();
+di cmd tulis php artisan migrate:fresh --seed
+
+
+cara buat factory
+bisa pake:  php artisan make:facatory PostFactory
+atau bisa pake visualcode 
+
+api gambar
+https://source.unsplash.com/
+
+position-absolute :agar kedepan
+px-2:padding kiri kanan
+py-2:padding atas bawah
+function :
+1.skip:($posts->skip(1) as $post)
+2.>diffForHumans : {{ $posts[0]->created_at->diffForHumans() }}
+
+6:42 AM 10/28/2021
+3. paragraph di fakakker
+paragraph itu cma beberapa paragrap
+paragraphs:beberapa paragrap dan bentuknya array
+implode artinya dijoin
+
+cara penulisan di java&php
+ cara 1 : pake implode
+            'body' => '<p>'.implode('</p><p>',$this->faker->paragraphs(mt_rand(5, 10))).'</p>',//paragraph(mt_rand(5, 10)),
+ cara 2,collet adalah membuat aray biasa menjadi collect, dan pake map
+            'body' => collect($this->faker->paragraphs(mt_rand(5, 10)))
+                 ->map(function ($p) {
+                    return "<p>$p</p>";
+                 }),
+ cara 3,function dirubah menjadi fn
+           'body' => collect($this->faker->paragraphs(mt_rand(5, 10)))
+            ->map(fn ($p) =>"<p>$p</p>")    
+            ->implode(''),
+
+class="img-fluid"->untuk membuat gambar responsiv
+class="my-3" margin y atas bawah dikasih batas
+p-0->padding kosong
+d-flex : agar kebawah gambar
+align-items-center :agar ketengah
+flex-fill :agar penuh
+style="background-color: rgba(0, 0, 0, 0.07)" :transparan
+7:59 AM 11/10/2021
+justify-content-center=untuk biar dia ketengah
+ dd(request('search'));//menangkap request dengan paramneter name = search
+
+query di elocont
+$posts = Posts::lates();
+$posts->where('tittle','like','%'.request('search').'%')
+	
+                  ->orwhere('body','like','%'.request('search').'%');
+7:08 AM 11/11/2021
+query scope
+1. membuat query where di model
+  public function scopeFilter($query){
+    IF(request('search')){
+     return $query->where('title','like','%'.request('search').'%')
+            ->orwhere('body','like','%'.request('search').'%');
+        }
+    }
+18:29
+7:30 AM 11/12/2021
+1. null coalescing operator di php
+ dari if begini
+	if (isset($filters['search']) ? $filters['search'] : False)
+ ketika menggunakan null
+	if ($filters['search']?? False)
+
+search and pages 29 50
+------------------
+6:05 AM 12/3/2021
+------------------
+-------------------
+di postcontroller 
+-------------------
+//4. penambahan pencarian untuk category
+            "posts" => Posts::latest()->Filter(request(['search','category']))->get()
+-------------------
+di model post.php
+-------------------
+cara 4. penambahan search category,join ke tabel category dg whereHas, perhatikan di post controller bagian 4
+fungsi
+whereHas adalah untuk menjoin relantionship ke tabel category, 
+fungsi 
+use untuk menagmbil parameter category diatasnya karena tidak kebaca jika langsung $category disangkanya adalah variable baru
+contoh dibawah ini
+            $query->when($filters['category']?? false, function($query,$category){
+                //whereHas adalah untuk menjoin relantionship ke tabel category, fungsi use untuk menagmbil parameter category diatasnya karena tidak kebaca jika langsung $category disangkanya adalah variable baru
+                return $query->whereHas('category',function($query) use ($category){
+                       $query->where('slug',$category);
+                });
+            });
+        }
+
+rubah juga dipas klik nya,ditambahkan category
+<a href="/posts?category={{ $posts[0]->category->id }}" class="text-decoration-none">
+tambahkan di searchnya 
+
+ {{-- ini untuk penambahan search by category --}}
+                @if (request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}" >
+                @endif
+search and pag 30:09
+
+7:27 AM 12/5/2021
+
+https://github.com/itsgoingd/clockwork
+DITERMINAL
+composer require itsgoingd/clockwork
+CROME -SETTING-EXTENSION-CHROME WEB STORE
+eager loading agar cepat sebuah query menggunkan with() sebelum tabel
+
+5:35 AM 12/21/2021
+MASIH MASALAH DI posts?category=web-programin pas di categories.blade tidak memfilter dg benar
+
+--Pagination
+di menit 44 search and paginatiosn dilewat ke pagin langsung ke menit 48
+untuk pagination tinggal panggil paginate()pada controller
+isi berapa halaman, ->getall() diganti, contoh paginate(17)
+
+
+search and paginat menit 49:00
+7:03 AM 12/22/2021
+untuk menampilkan halaman tambah
+{{$posts->links}}
+untuk merubah tampilannya ke bosstrap
+masuk ke file app-providers-appServiceProvider
+karena laravel defaultnya menggunakan telwin
+
+  public function boot()
+    {
+        //
+    }
+tambah 
+
+use Illuminate\Pagination\Paginator;
+ public function boot()
+    {
+        Paginator::useBootstrap();
+    }
+untuk merubah page ke kanan bisa diakalin denagn flex box
+caranya
+justify-content-end :kekanan
+justify-content-center :tengah
+justify-content-start :kanan
+<div class='d-flex'></>
+
+--Agar ketika pencarian pagination sebelumnya kereset kembali
+gunakan
+withQueryString
+ex:
+paginate(7)->WithQueryString()
+
+PR 
+psots?category=personal ga dapet
+kategory by user id jadi gabisa
+
+tinggal materi view dan login

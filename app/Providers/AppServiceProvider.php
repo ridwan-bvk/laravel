@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Providers;
-
+/*nambahin pagintaionbosstrap*/
+// use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Pagination\Paginator;
+// 
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
     }
 }
